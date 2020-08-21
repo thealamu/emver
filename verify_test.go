@@ -4,10 +4,12 @@ import "testing"
 
 func TestVerify(t *testing.T) {
 	emails := []string{
-		"vaguemail369@gmail.com",
+		"human@outlook.com",
+		"foo.bar@gmail.com",
 	}
 
 	vals := []bool{
+		true,
 		true,
 	}
 

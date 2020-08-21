@@ -2,6 +2,26 @@ package main
 
 import "testing"
 
+func TestGetMxAddr(t *testing.T) {
+	emails := []string{
+		"foo.bar@gmail.com",
+	}
+
+	vals := []string{
+		"gmail-smtp-in.l.google.com.",
+	}
+
+	for i, email := range emails {
+		ret, err := getMXAddr(email)
+		if err != nil {
+			t.Error(err)
+		}
+		if ret != vals[i] {
+			t.Errorf("getMXAddr returned %s for email %s, expected %s", ret, email, vals[i])
+		}
+	}
+}
+
 func TestIsValid(t *testing.T) {
 	emails := []string{
 		"foo@bar.com",

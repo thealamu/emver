@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"net"
+	"net/smtp"
 	"regexp"
 	"strings"
 )
@@ -35,4 +36,21 @@ func verify(email string) (bool, error) {
 		return false, errInvalidEmail
 	}
 
+	host, err := getMXAddr(email)
+	if err != nil {
+		return false, err
+	}
+
+	addr := net.JoinHostPort(host, "25")
+	conn, err := smtp.Dial(addr)
+	if err != nil {
+		return false, err
+	}
+
+	err = conn.Verify(email)
+	if err != nil {
+		return false, err
+	}
+
+	return true, nil
 }

@@ -15,5 +15,5 @@ func main() {
 	}
 	addr := net.JoinHostPort("", port)
 	log.Printf("Serving on %s...\n", addr)
-	http.ListenAndServe(addr, nil)
+	log.Fatal(http.ListenAndServe(addr, nil))
 }

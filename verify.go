@@ -1,10 +1,13 @@
 package main
 
 import (
+	"errors"
 	"net"
 	"regexp"
 	"strings"
 )
+
+var errInvalidEmail = errors.New("Email is invalid")
 
 // isValid returns true if the email is valid
 func isValid(email string) bool {
@@ -28,5 +31,8 @@ func getMXAddr(email string) (string, error) {
 }
 
 func verify(email string) (bool, error) {
+	if !isValid(email) {
+		return false, errInvalidEmail
+	}
 
 }

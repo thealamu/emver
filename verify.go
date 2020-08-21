@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"net"
 	"net/smtp"
 	"regexp"
@@ -41,8 +42,10 @@ func verify(email string) (bool, error) {
 		return false, err
 	}
 
-	addr := net.JoinHostPort(host, "25")
+	addr := net.JoinHostPort(host, "465")
+	fmt.Println(addr)
 	conn, err := smtp.Dial(addr)
+	fmt.Println(conn)
 	if err != nil {
 		return false, err
 	}

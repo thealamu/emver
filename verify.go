@@ -1,7 +1,6 @@
 package main
 
 import (
-	"crypto/tls"
 	"errors"
 	"fmt"
 	"net"
@@ -46,13 +45,14 @@ func verify(email string) (bool, error) {
 	addr := net.JoinHostPort(strings.TrimRight(host, "."), "25")
 	fmt.Println(addr)
 
-	tlsConfig := &tls.Config{InsecureSkipVerify: true}
-	tlsConn, err := tls.Dial("tcp", addr, tlsConfig)
-	if err != nil {
-		return false, err
-	}
+	/*
+		tlsConfig := &tls.Config{InsecureSkipVerify: true}
+		tlsConn, err := tls.Dial("tcp", addr, tlsConfig)
+		if err != nil {
+			return false, err
+		}*/
 
-	conn, err := smtp.NewClient(tlsConn, "saturday")
+	conn, err := smtp.Dial(addr)
 	if err != nil {
 		return false, err
 	}

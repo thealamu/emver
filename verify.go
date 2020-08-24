@@ -57,10 +57,17 @@ func verify(email string) (bool, error) {
 		return false, err
 	}
 
-	err = conn.Verify(email)
-	if err != nil {
+	if err = conn.Mail("herman1999@gmail.com"); err != nil {
+		return false, err
+	}
+	if err = conn.Rcpt(email); err != nil {
 		return false, err
 	}
 
+	/* 	err = conn.Verify(email)
+	   	if err != nil {
+	   		return false, err
+	   	}
+	*/
 	return true, nil
 }

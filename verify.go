@@ -7,6 +7,7 @@ import (
 	"net/smtp"
 	"regexp"
 	"strings"
+	"time"
 )
 
 var errInvalidEmail = errors.New("Email is invalid")
@@ -57,7 +58,9 @@ func verify(email string) (bool, error) {
 		return false, err
 	}
 
-	if err = conn.Mail("herman1999@gmail.com"); err != nil {
+	sendEmail := getRandomEmail(time.Now().UnixNano())
+	fmt.Printf("Using send email %s\n", sendEmail)
+	if err = conn.Mail(sendEmail); err != nil {
 		return false, err
 	}
 	if err = conn.Rcpt(email); err != nil {

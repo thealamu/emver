@@ -64,10 +64,5 @@ func verify(email string) (bool, error) {
 		return false, err
 	}
 
-	/* 	err = conn.Verify(email)
-	   	if err != nil {
-	   		return false, err
-	   	}
-	*/
 	return true, nil
 }
